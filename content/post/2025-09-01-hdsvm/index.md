@@ -1,0 +1,14 @@
+---
+title: 'hdsvm: Fast Algorithm for Support Vector Machine'
+author: 'Yikai Zhang'
+date: '2025-09-30'
+slug: hdsvm
+categories: ['R']
+tags: ['SVM','High-Dimensional', 'Classification']
+---
+
+# Intro
+
+Implements an efficient algorithm for fitting the entire regularization path of support vector machine models with elastic-net penalties using a generalized coordinate descent scheme. The framework also supports SCAD and MCP penalties. It is designed for high-dimensional datasets and emphasizes numerical accuracy and computational efficiency. 
+
+This package implements the algorithms proposed in Tang, Q., Zhang, Y., & Wang, B. (2022) <https://openreview.net/pdf?id=RvwMTDYTOb>.
