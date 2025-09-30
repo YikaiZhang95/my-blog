@@ -3,8 +3,8 @@ date: "2025-09-29T21:48:51-07:00"
 title: About
 ---
 
-### About
-This is Yikai's blog. I'm a statistical Ph.D. candidate with 10+ years of experience in statistics and machine learning:
+### About me
+This is Yikai Zhang. I'm a statistical Ph.D. candidate with 10+ years of experience in statistics and machine learning:
 - Developed innovative algorithms, including the Finite Smoothing Algorithm and Generalized Takeuchi’s Information Criteria, transforming SVM and large_margin classifiers.
 - Proficient in Python, R, SQL, and Fortran, delivering high-performance tools and **open-source packages**; integrate **Fortran/CUDA** kernels.
 - Published author with research showcased at **ICML**.
