@@ -1,6 +1,6 @@
 baseurl: /
 languageCode: en-US
-title: A Hugo website
+title: Yikai Zhang’s Package Lab
 theme: hugo-lithium
 ignoreFiles:
   - \.Rmd$
@@ -39,6 +39,7 @@ markup:
       unsafe: yes
   highlight:
     codeFences: no
+
 
 
 
