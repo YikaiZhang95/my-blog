@@ -1,6 +1,12 @@
 ---
-date: "2016-05-05T21:48:51-07:00"
+date: "2025-09-30T21:48:51-07:00"
 title: About
 ---
 
-This is a "hello world" example website for the [**blogdown**](https://github.com/rstudio/blogdown) package. The theme was forked from [@jrutheiser/hugo-lithium-theme](https://github.com/jrutheiser/hugo-lithium-theme) and modified by [Yihui Xie](https://github.com/yihui/hugo-lithium).
+This is Yikai's blog. I'm a statistical Ph.D. candidate with 10+ years of experience in statistics and machine learning:
+- Developed innovative algorithms, including the Finite Smoothing Algorithm and Generalized Takeuchi’s Information Criteria, transforming SVM and large-margin classifiers.
+- Proficient in Python, R, SQL, and Fortran, delivering high-performance tools and **open-source packages**; integrate **Fortran/CUDA** kernels.
+- Published author with research showcased at **ICML**.
+- Successfully collaborated across diverse industries, including insurance and chemical manufacturing, to deliver impactful tools.
+  
+I will use this blog to update my packages' tutorials. All open-source repositories are publicly accessible in [Github](https://github.com/YikaiZhang95) and you can find more information about me on in [LinkedIn](www.linkedin.com/in/yikai-zhang-66a01b160).
