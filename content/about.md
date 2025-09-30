@@ -9,4 +9,4 @@ This is Yikai's blog. I'm a statistical Ph.D. candidate with 10+ years of experi
 - Published author with research showcased at **ICML**.
 - Successfully collaborated across diverse industries, including insurance and chemical manufacturing, to deliver impactful tools.
   
-I will use this blog to update my packages' tutorials. All open-source repositories are publicly accessible in [Github](https://github.com/YikaiZhang95) and you can find more information about me on in [LinkedIn](www.linkedin.com/in/yikai-zhang-66a01b160).
+I will use this blog to update my packages' tutorials. All open-source repositories are publicly accessible in [Github](https://github.com/YikaiZhang95) and you can find more information about me on in [LinkedIn](https://www.linkedin.com/in/yikai-zhang-66a01b160/).
