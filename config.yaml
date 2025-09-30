@@ -20,7 +20,7 @@ params:
   MathJaxCDN: //cdnjs.cloudflare.com/ajax/libs
   MathJaxVersion: 2.7.5
   description: A website built through Hugo and blogdown.
-  favicon: yzlogo.png
+  favicon: favicon.ico
   highlightjsCDN: //cdnjs.cloudflare.com/ajax/libs
   highlightjsLang:
     - r
@@ -39,6 +39,7 @@ markup:
       unsafe: yes
   highlight:
     codeFences: no
+
 
 
 
