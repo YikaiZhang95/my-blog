@@ -30,7 +30,7 @@ params:
   logo:
     alt: Logo
     height: 50
-    url: logo.png
+    url: yzlogo.png
     width: 50
 markup:
   defaultMarkdownHandler: goldmark
@@ -39,4 +39,5 @@ markup:
       unsafe: yes
   highlight:
     codeFences: no
+
 
