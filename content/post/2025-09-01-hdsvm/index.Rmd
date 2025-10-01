@@ -32,7 +32,7 @@ $$
 where $\omega$ is a user-specified weight vector (so that one may realize adaptive elastic net, etc.). Thus the full objective is
 
 $$
-G(\beta_0, \beta) = \frac{1}{n} \sum_{i=1}^n \bigl(1 - y_i(\beta_0 + x_i^\top \beta)\bigr)_+ + P_{\omega, \lambda_1, \lambda_2}(\beta).  
+G(\beta_0, \beta)= \frac{1}{n} \sum_{i=1}^n\left(1 - y_i(\beta_0 + x_i^\top \beta)\right)_+ + P\_{\omega, \lambda_1, \lambda_2}(\beta)
 $$
 
 (This corresponds to equation (2) in the paper.)  
@@ -45,8 +45,8 @@ They introduce a $\delta$-smoothed hinge loss $L_\delta(u)$, defined as:
 
 $$
 L_\delta(u) = \begin{cases}
-1 - u, & u \le 1 - \delta, \\
-\frac{1}{4\delta} [u - (1 + \delta)]^2, & 1 - \delta < u < 1 + \delta, \\
+1 - u, & u \le 1 - \delta, \\\
+\frac{1}{4\delta} [u - (1 + \delta)]^2, & 1 - \delta < u < 1 + \delta, \\\
 0, & u \ge 1 + \delta.
 \end{cases}
 $$
