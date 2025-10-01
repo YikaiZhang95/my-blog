@@ -66,7 +66,7 @@ $$
 
 One could simply minimize `\(G_\delta\)` and hope the solution approximates that of the original non-smooth problem. Then we show that one can recover the **exact** (non-smoothed) solution by imposing certain linear constraints (on the “support vectors” or “kink set”) when solving a smoothed problem.
 
-#Installation
+# Installation
 Like most of R packages, you can install it directly from CRAN. Run the following command in R console:
 
 ``` r
@@ -106,3 +106,4 @@ y <- 2 * rbinom(n, 1, prob) - 1
 cv.fit <- cv.hdsvm(x, y, lam2 = 0.01)
 coef(cv.fit, s = c(0.02, 0.03))
 ```
+
