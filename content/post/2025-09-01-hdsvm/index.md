@@ -7,8 +7,102 @@ categories: ['R']
 tags: ['SVM','High-Dimensional', 'Classification']
 ---
 
-# Intro
+# Introduction
 
-Implements an efficient algorithm for fitting the entire regularization path of support vector machine models with elastic-net penalties using a generalized coordinate descent scheme. The framework also supports SCAD and MCP penalties. It is designed for high-dimensional datasets and emphasizes numerical accuracy and computational efficiency. 
+This document summarizes the **high-dimensional SVM (hdsvm)** component of the paper *Finite Smoothing Algorithm for High-Dimensional Support Vector Machines and Quantile Regression* by Tang, Zhang & Wang (2024). We focus particularly on how they design and analyze the **Finite Smoothing Algorithm (FSA)** to handle the non-smooth hinge loss in a way that yields **exact** solutions, and how this is implemented in the **hdsvm** R package. Along the way, we sketch the key algorithmic ideas and then show how one might use `hdsvm` in R with examples.
 
-This package implements the algorithms proposed in Tang, Q., Zhang, Y., & Wang, B. (2022) <https://openreview.net/pdf?id=RvwMTDYTOb>.
+## Problem setup: sparse penalized high-dimensional SVM
+
+We have training data `\((x_i, y_i), i=1,\dots,n\)`, with `\(x_i \in \mathbb R^p\)`, `\(y_i \in \{-1, +1\}\)`. We are in the high-dimensional regime `\(p \gg n\)`.  
+
+The standard (linear) SVM with hinge loss can be written in the primal form:
+
+$$
+\min_{\beta_0 \in \mathbb R, \,\beta \in \mathbb R^p} \frac{1}{n} \sum_{i=1}^n \left( 1 - y_i(\beta_0 + x_i^\top \beta)\right)_+ + \tfrac12 \lambda_2 \|\beta\|_2^2
+$$
+
+where `\((u)_+ = \max(0, u)\)`.  
+
+To induce sparsity (feature selection), we consider a more general penalty:
+
+$$
+P_{\omega, \lambda_1, \lambda_2}(\beta) = \lambda_1 \|\omega \circ \beta\|_1 + \tfrac12 \lambda_2 \|\beta\|_2^2
+$$
+
+where `\(\omega\)` is a user-specified weight vector (so that one may realize adaptive elastic net, etc.). Thus the full objective is
+
+$$
+G(\beta_0, \beta) = \frac{1}{n} \sum_{i=1}^n \bigl(1 - y_i(\beta_0 + x_i^\top \beta)\bigr)_+ + P_{\omega, \lambda_1, \lambda_2}(\beta).  
+$$
+
+(This corresponds to equation (2) in the paper.)  
+
+The difficulty: the hinge loss `\((\cdot)_+\)` is **non-smooth**, and thus naive coordinate descent is not directly applicable (subgradient methods are slower, dual methods may not scale well in very high dimension).
+
+## Finite Smoothing Algorithm (FSA)
+
+They introduce a `\(\delta\)`-smoothed hinge loss `\(L_\delta(u)\)`, defined as:
+
+$$
+L_\delta(u) = \begin{cases}
+1 - u, & u \le 1 - \delta, \\
+\frac{1}{4\delta} [u - (1 + \delta)]^2, & 1 - \delta < u < 1 + \delta, \\
+0, & u \ge 1 + \delta.
+\end{cases}
+$$
+
+This is a "smoothed hinge" that approximates `\((1 - u)_+\)`. One can show  
+$$
+0 \le L_\delta(u) - (1 - u)_+ \le \frac{\delta}{4}, \forall u.  
+$$
+
+Thus when `\(\delta\)` is small, `\(L_\delta\)` is close to the hinge loss. 
+
+Define the smoothed objective:
+
+$$
+G_\delta(\beta_0, \beta) = \frac{1}{n}\sum_{i=1}^n L_\delta\bigl(y_i(\beta_0 + x_i^\top \beta)\bigr) + P_{\omega, \lambda_1, \lambda_2}(\beta).
+$$
+
+One could simply minimize `\(G_\delta\)` and hope the solution approximates that of the original non-smooth problem. Then we show that one can recover the **exact** (non-smoothed) solution by imposing certain linear constraints (on the “support vectors” or “kink set”) when solving a smoothed problem.
+
+#Installation
+Like most of R packages, you can install it directly from CRAN. Run the following command in R console:
+
+``` r
+install.packages("hdsvm")
+```
+Users also can download the package source from CRAN.
+
+# Quick Start
+
+## The **hdsvm** R package
+
+The authors provide an R package **hdsvm** implementing the FSA algorithm for high-dimensional SVM. :contentReference[oaicite:13]{index=13}  
+
+### Key features & interface
+
+From the CRAN documentation:
+
+- It computes the full regularization path over a sequence of `\(\lambda_1\)` values (L1 penalty), given a fixed `\(\lambda_2\)`. :contentReference[oaicite:14]{index=14}  
+- Supports nonconvex penalties via `nc.hdsvm()` (SCAD, MCP).
+- Integrates warm-start and active-set strategies.
+- The smoothing parameter `hval`, standardization of features, convergence tolerance `eps`, and maximum iterations `maxit` are user-configurable.
+- Predict and coef methods are provided (for class predictions or extracting coefficients at chosen `\(\lambda\)`). 
+
+
+``` r
+library(hdsvm)
+set.seed(315)
+n <- 100
+p <- 400
+x1 <- matrix(rnorm(n/2 * p, -0.25, 0.1), n/2)
+x2 <- matrix(rnorm(n/2 * p, 0.25, 0.1), n/2)
+x <- rbind(x1, x2)
+beta_true <- 0.1 * rnorm(p)
+prob <- plogis(c(x %*% beta_true))
+y <- 2 * rbinom(n, 1, prob) - 1
+
+cv.fit <- cv.hdsvm(x, y, lam2 = 0.01)
+coef(cv.fit, s = c(0.02, 0.03))
+```
